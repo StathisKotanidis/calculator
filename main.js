@@ -1,4 +1,4 @@
-let display = document.querySelector('.display')
+let display = document.querySelector('.screen')
 let zero = document.querySelector('#zero')
 let one = document.querySelector('#one')
 let two = document.querySelector('#two')
@@ -15,52 +15,55 @@ let multiplication = document.querySelector('#multiply')
 let division = document.querySelector('#divide')
 let equal = document.querySelector("#equal")
 let clear = document.querySelector('#clear')
+let deleteLastNumber = document.querySelector('#delete')
+
+
+let inputsArray = []
 let currentInput = ''
 
-
-function adding(a, b) {
-    return a + b
-}
-
-function subtracting(a, b) {
-    return a - b
-}
-
-function multiplying(a, b) {
-    return a * b
-}
-
-function dividing(a, b) {
-    return a / b
-}
 
 function operate(a, operator, b) {
 
     if (operator == '+') {
-        return adding(a, b)
+        return a + b
     } else if (operator == '-') {
-        return subtracting(a, b)
-    } else if (operator == "*") {
-        return multiplying(a, b)
+        return a - b
+    } else if (operator == "X") {
+        return a * b
     } else if (operator == '/') {
-        return dividing(a, b)
+        return a / b
     } else {
         console.log('Error')
     }
 }
 
 function updateDisplay() {
+
     display.textContent = currentInput;
 }
 
+function captureEveryInput() {
+
+    //console.log('Before the push')
+    inputsArray.push(currentInput)
+    return inputsArray
+}
+
+zero.addEventListener('click', () => {
+    currentInput += '0';
+    captureEveryInput()
+    updateDisplay();
+});
 
 one.addEventListener('click', () => {
     currentInput += '1';
+    captureEveryInput()
     updateDisplay();
 });
 
 two.addEventListener('click', () => {
     currentInput += '2';
+    captureEveryInput()
     updateDisplay();
 });
 
@@ -100,6 +103,45 @@ nine.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    currentInput = ' '
+
+    currentInput = ''
     updateDisplay()
+
 })
+
+deleteLastNumber.addEventListener('click', () => {
+    captureEveryInput().pop()
+})
+
+
+addition.addEventListener('click', () => {
+    currentInput += ' + ';
+    updateDisplay();
+})
+
+subtraction.addEventListener('click', () => {
+    currentInput += ' - ';
+    updateDisplay();
+})
+
+multiplication.addEventListener('click', () => {
+    currentInput += ' X ';
+    updateDisplay();
+})
+
+division.addEventListener('click', () => {
+    currentInput += ' / ';
+    updateDisplay();
+})
+
+equal.addEventListener('click', () => {
+
+    let myarray = currentInput.split(' ')
+    currentInput = operate(parseFloat(myarray[0]), myarray[1], parseFloat(myarray[2]))
+    updateDisplay()
+
+})
+
+
+
+
