@@ -9,40 +9,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="calculator-wrapper">
 
-        <div class="display-area">
-            <div class="screen"> </div>
-        </div>
+    <section class="calculator-wrapper">
 
-        <div class="button-wrapper">
+        <section class="display-area">
 
-            <button>x<sup>2</sup></button>
-            <button id="clear"><i class="fa-regular fa-trash-can"></i></button>
-            <button id="delete"><i class="fa-solid fa-delete-left"></i></button>
-            <button id="divide"><i class="fa-solid fa-divide"></i></button>
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
-            <button id="multiply"><i class="fa-solid fa-xmark"></i></button>
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
-            <button id="minus"><i class="fa-solid fa-minus"></i></button>
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="plus"><i class="fa-solid fa-plus"></i></button>
-            <button>+/-</button>
-            <button id="zero">0</button>
-            <button id="dot">.</button>
-            <button id="equal"><i class="fa-solid fa-equals"></i></button>
+            <div class="screen">0</div>
 
-        </div>
-    </div>
+        </section>
+
+        <section class="button-wrapper">
+
+            <div class="button-row">
+                <button id="clear"><i class="fa-regular fa-trash-can"></i></button>
+                <button id="delete"><i class="fa-solid fa-delete-left"></i></button>
+                <button id="divide"><i class="fa-solid fa-divide"></i></button>
+            </div>
+
+            <div class="button-row">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button id="multiply"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="button-row">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button id="minus"><i class="fa-solid fa-minus"></i></button>
+            </div>
+
+            <div class="button-row">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button id="plus"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="button-row">
+                <button id="zero">0</button>
+                <button id="equal"><i class="fa-solid fa-equals"></i></button>
+            </div>
+
+        </section>
+
+
+    </section>
+
+    <footer>
+        <p><i class="fa-sharp fa-solid fa-copyright" style="color: #808489;"></i> Stathis Kotanidis <i
+                class="fa-brands fa-github fa-beat"></i></p>
+    </footer>
 
     <script src="main.js"></script>
 </body>
