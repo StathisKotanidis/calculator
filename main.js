@@ -15,12 +15,9 @@ let multiplication = document.querySelector('#multiply')
 let division = document.querySelector('#divide')
 let equal = document.querySelector("#equal")
 let clear = document.querySelector('#clear')
-let deleteLastNumber = document.querySelector('#delete')
+let deleteLastDigit = document.querySelector('#delete')
 
-
-let inputsArray = []
-let currentInput = ''
-
+let currentInput = []
 
 function operate(a, operator, b) {
 
@@ -28,7 +25,7 @@ function operate(a, operator, b) {
         return a + b
     } else if (operator == '-') {
         return a - b
-    } else if (operator == "X") {
+    } else if (operator == "*") {
         return a * b
     } else if (operator == '/') {
         return a / b
@@ -39,109 +36,123 @@ function operate(a, operator, b) {
 
 function updateDisplay() {
 
-    display.textContent = currentInput;
-}
+    let displayValue = currentInput.join('');
+    display.textContent = displayValue
 
-function captureEveryInput() {
-
-    //console.log('Before the push')
-    inputsArray.push(currentInput)
-    return inputsArray
 }
 
 zero.addEventListener('click', () => {
-    currentInput += '0';
-    captureEveryInput()
+    currentInput.push(0)
     updateDisplay();
 });
 
 one.addEventListener('click', () => {
-    currentInput += '1';
-    captureEveryInput()
+    currentInput.push(1)
     updateDisplay();
 });
 
 two.addEventListener('click', () => {
-    currentInput += '2';
-    captureEveryInput()
+    currentInput.push(2)
     updateDisplay();
 });
 
 three.addEventListener('click', () => {
-    currentInput += '3';
+    currentInput.push(3)
     updateDisplay();
 });
 
 four.addEventListener('click', () => {
-    currentInput += '4';
+    currentInput.push(4)
     updateDisplay();
 });
 
 five.addEventListener('click', () => {
-    currentInput += '5';
+    currentInput.push(5)
     updateDisplay();
 });
 
 six.addEventListener('click', () => {
-    currentInput += '6';
+    currentInput.push(6)
     updateDisplay();
 });
 
+
 seven.addEventListener('click', () => {
-    currentInput += '7';
+    currentInput.push(7)
     updateDisplay();
 });
 
 eight.addEventListener('click', () => {
-    currentInput += '8';
+    currentInput.push(8)
     updateDisplay();
 });
 
 nine.addEventListener('click', () => {
-    currentInput += '9';
+    currentInput.push(9)
     updateDisplay();
 });
 
 clear.addEventListener('click', () => {
 
-    currentInput = ''
-    updateDisplay()
+    display.textContent = 0
+    currentInput = []
 
 })
 
-deleteLastNumber.addEventListener('click', () => {
-    captureEveryInput().pop()
-})
+deleteLastDigit.addEventListener('click', () => {
 
+    if (currentInput.length === 1) {
+        currentInput.pop()
+        display.textContent = 0
+    } else {
+        currentInput.pop()
+        updateDisplay()
+    }
+
+})
 
 addition.addEventListener('click', () => {
-    currentInput += ' + ';
+    currentInput.push('+')
     updateDisplay();
 })
 
 subtraction.addEventListener('click', () => {
-    currentInput += ' - ';
+    currentInput.push('-')
     updateDisplay();
 })
 
 multiplication.addEventListener('click', () => {
-    currentInput += ' X ';
+    currentInput.push('*')
     updateDisplay();
 })
 
 division.addEventListener('click', () => {
-    currentInput += ' / ';
+    currentInput.push('/')
     updateDisplay();
 })
 
 equal.addEventListener('click', () => {
 
-    let myarray = currentInput.split(' ')
-    currentInput = operate(parseFloat(myarray[0]), myarray[1], parseFloat(myarray[2]))
-    updateDisplay()
+    // let outputString = currentInput.join('')
+    // currentInput = outputString.split(/(\+|-|\*|\/)/);
+    // display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
+    stringToArray()
+    console.log(currentInput)
+    emptyingArray()
+    console.log(currentInput)
+    currentInput.push(display.textContent)
+    console.log(currentInput)
 
 })
 
+function emptyingArray() {
+    currentInput = []
+}
 
+function stringToArray() {
 
+    let outputString = currentInput.join('')
+    currentInput = outputString.split(/(\+|-|\*|\/)/);
+    display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
+}
 
