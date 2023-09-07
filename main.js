@@ -36,61 +36,64 @@ function operate(a, operator, b) {
 
 function updateDisplay() {
 
-    let displayValue = currentInput.join('');
+
+    let displayValue = currentInput.join('')
     display.textContent = displayValue
+    // display.textContent = currentInput.join('')
+    // let screenOuput = display.textContent.substring(0, 4)
+    // display.textContent = screenOuput
 
 }
 
 zero.addEventListener('click', () => {
     currentInput.push(0)
-    updateDisplay();
+    updateDisplay()
 });
 
 one.addEventListener('click', () => {
     currentInput.push(1)
-    updateDisplay();
+    updateDisplay()
 });
 
 two.addEventListener('click', () => {
     currentInput.push(2)
-    updateDisplay();
+    updateDisplay()
 });
 
 three.addEventListener('click', () => {
     currentInput.push(3)
-    updateDisplay();
-});
+    updateDisplay()
+})
 
 four.addEventListener('click', () => {
     currentInput.push(4)
-    updateDisplay();
-});
+    updateDisplay()
+})
 
 five.addEventListener('click', () => {
     currentInput.push(5)
-    updateDisplay();
+    updateDisplay()
 });
 
 six.addEventListener('click', () => {
     currentInput.push(6)
-    updateDisplay();
+    updateDisplay()
 });
-
 
 seven.addEventListener('click', () => {
     currentInput.push(7)
-    updateDisplay();
-});
+    updateDisplay()
+})
 
 eight.addEventListener('click', () => {
     currentInput.push(8)
-    updateDisplay();
-});
+    updateDisplay()
+})
 
 nine.addEventListener('click', () => {
     currentInput.push(9)
-    updateDisplay();
-});
+    updateDisplay()
+})
 
 clear.addEventListener('click', () => {
 
@@ -101,6 +104,7 @@ clear.addEventListener('click', () => {
 
 deleteLastDigit.addEventListener('click', () => {
 
+    currentInput = stringToArrayv2()
     if (currentInput.length === 1) {
         currentInput.pop()
         display.textContent = 0
@@ -113,32 +117,29 @@ deleteLastDigit.addEventListener('click', () => {
 
 addition.addEventListener('click', () => {
     currentInput.push('+')
-    updateDisplay();
+    updateDisplay()
 })
 
 subtraction.addEventListener('click', () => {
     currentInput.push('-')
-    updateDisplay();
+    updateDisplay()
 })
 
 multiplication.addEventListener('click', () => {
     currentInput.push('*')
-    updateDisplay();
+    updateDisplay()
 })
 
 division.addEventListener('click', () => {
     currentInput.push('/')
-    updateDisplay();
+    updateDisplay()
 })
 
 equal.addEventListener('click', () => {
 
     stringToArray()
-    console.log(`After stringToarray currentInput is : ${currentInput}`)
     emptyingArray()
-    console.log(`After emptyingArray currentInput is : ${currentInput}`)
     currentInput.push(display.textContent)
-    console.log(`Final currentInput is : ${currentInput}`)
 
 })
 
@@ -151,15 +152,48 @@ function stringToArray() {
 
     console.log('currentInput before join() is : ')
     console.log(currentInput)
+
     let outputString = currentInput.join('')
     console.log('outputString value is:')
     console.log(outputString)
+
     currentInput = outputString.split(/(\+|-|\*|\/)/);
     console.log('currentInput after outputString.split()')
     console.log(currentInput)
+
     display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
-    console.log(`typeof display.textContent is: ${typeof (display.textContent)}`)
-    // currentInput = parseFloat(display.textContent)
+    console.log('Display.textConten value is:')
+    console.log(display.textContent)
 
 }
 
+function stringToArrayv2() {
+
+    return display.textContent.split('');
+
+    /*  
+    i made this function to fix 2 buggs i had. The first one was that was when i tried to use the
+    delete button on an output it returned 0, eg i have 25*2=50. So my output is 50 and if i used
+    the delete button i should  had got 5 in my screen instead i was getting 0. This function
+    converts a string to array , eg "50" --> ['5','0'] and then i assigned this value at my 
+    currentInput value in my deleteLastDigit event listener.
+
+    The second bug it fixed it was that whenever i had 0 in my screen and  i pressed delete
+    button the 0 was removed and i had an empty screen which i didnt want.
+    Tha makes the screen look immutable when there is already a 0 on it.
+    */
+}
+
+// function limitDecimaltoThree() {
+
+//     let substrinDisplay = display.textContent.substring(0, 4)
+//     return substrinDisplay
+
+// }
+
+/* Bugs that still  need to be resolved :
+1.limit decimal places
+2.Fix the maximun digits my screen can fit so it doesnt "stretch" my calculator 
+3.When i have 0 in my screen and press =, zero diassaperas and my screen shrinks
+4.When i have 0 in my screen and press an operator i get +,-,*,/.I dont want this.
+*/
