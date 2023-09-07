@@ -133,26 +133,33 @@ division.addEventListener('click', () => {
 
 equal.addEventListener('click', () => {
 
-    // let outputString = currentInput.join('')
-    // currentInput = outputString.split(/(\+|-|\*|\/)/);
-    // display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
     stringToArray()
-    console.log(currentInput)
+    console.log(`After stringToarray currentInput is : ${currentInput}`)
     emptyingArray()
-    console.log(currentInput)
+    console.log(`After emptyingArray currentInput is : ${currentInput}`)
     currentInput.push(display.textContent)
-    console.log(currentInput)
+    console.log(`Final currentInput is : ${currentInput}`)
 
 })
 
 function emptyingArray() {
+
     currentInput = []
 }
 
 function stringToArray() {
 
+    console.log('currentInput before join() is : ')
+    console.log(currentInput)
     let outputString = currentInput.join('')
+    console.log('outputString value is:')
+    console.log(outputString)
     currentInput = outputString.split(/(\+|-|\*|\/)/);
+    console.log('currentInput after outputString.split()')
+    console.log(currentInput)
     display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
+    console.log(`typeof display.textContent is: ${typeof (display.textContent)}`)
+    // currentInput = parseFloat(display.textContent)
+
 }
 
