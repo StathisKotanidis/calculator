@@ -21,6 +21,7 @@ let currentInput = []
 
 function operate(a, operator, b) {
 
+
     if (operator == '+') {
         return a + b
     } else if (operator == '-') {
@@ -32,17 +33,13 @@ function operate(a, operator, b) {
     } else {
         console.log('Error')
     }
+
 }
 
 function updateDisplay() {
 
-
     let displayValue = currentInput.join('')
     display.textContent = displayValue
-    // display.textContent = currentInput.join('')
-    // let screenOuput = display.textContent.substring(0, 4)
-    // display.textContent = screenOuput
-
 }
 
 zero.addEventListener('click', () => {
@@ -116,32 +113,42 @@ deleteLastDigit.addEventListener('click', () => {
 })
 
 addition.addEventListener('click', () => {
-    currentInput.push('+')
-    updateDisplay()
-})
+    if (currentInput.length > 0 && display.textContent !== '0') {
+        currentInput.push('+');
+        updateDisplay();
+    }
+});
 
 subtraction.addEventListener('click', () => {
-    currentInput.push('-')
-    updateDisplay()
-})
+    if (currentInput.length > 0 && display.textContent !== '0') {
+        currentInput.push('-');
+        updateDisplay();
+    }
+});
 
 multiplication.addEventListener('click', () => {
-    currentInput.push('*')
-    updateDisplay()
-})
+    if (currentInput.length > 0 && display.textContent !== '0') {
+        currentInput.push('*');
+        updateDisplay();
+    }
+});
 
 division.addEventListener('click', () => {
-    currentInput.push('/')
-    updateDisplay()
-})
+    if (currentInput.length > 0 && display.textContent !== '0') {
+        currentInput.push('/');
+        updateDisplay();
+    }
+});
 
 equal.addEventListener('click', () => {
 
-    stringToArray()
-    emptyingArray()
-    currentInput.push(display.textContent)
+    if (currentInput.length > 0 && display.textContent !== '0') {
+        stringToArray();
+        emptyingArray();
+        currentInput.push(display.textContent);
+    }
 
-})
+});
 
 function emptyingArray() {
 
@@ -150,21 +157,9 @@ function emptyingArray() {
 
 function stringToArray() {
 
-    console.log('currentInput before join() is : ')
-    console.log(currentInput)
-
     let outputString = currentInput.join('')
-    console.log('outputString value is:')
-    console.log(outputString)
-
     currentInput = outputString.split(/(\+|-|\*|\/)/);
-    console.log('currentInput after outputString.split()')
-    console.log(currentInput)
-
     display.textContent = operate(parseFloat(currentInput[0]), currentInput[1], parseFloat(currentInput[2]))
-    console.log('Display.textConten value is:')
-    console.log(display.textContent)
-
 }
 
 function stringToArrayv2() {
@@ -184,16 +179,4 @@ function stringToArrayv2() {
     */
 }
 
-// function limitDecimaltoThree() {
 
-//     let substrinDisplay = display.textContent.substring(0, 4)
-//     return substrinDisplay
-
-// }
-
-/* Bugs that still  need to be resolved :
-1.limit decimal places
-2.Fix the maximun digits my screen can fit so it doesnt "stretch" my calculator 
-3.When i have 0 in my screen and press =, zero diassaperas and my screen shrinks
-4.When i have 0 in my screen and press an operator i get +,-,*,/.I dont want this.
-*/

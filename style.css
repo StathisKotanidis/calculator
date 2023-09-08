@@ -198,8 +198,7 @@ button:hover {
 }
 
 #clear,
-#equal,
-#zero {
+#equal {
 
     flex-basis: 47%;
 
