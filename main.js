@@ -4,47 +4,66 @@ let operators = document.querySelectorAll('.operator')
 let deleteLastCharacter = document.querySelector('#delete')
 let clear = document.querySelector('#clear')
 let equal = document.querySelector('#equal')
+let dot = document.querySelector('#dot')
 
-let currentInput = ''
+let overallInput = ''
+let currentNumber = ''
 
 numbers.forEach((number) => number.addEventListener('click', event => {
 
-    currentInput += event.target.textContent
+    currentNumber += event.target.textContent
     updateDisplay()
 }))
 
 operators.forEach((operator) => operator.addEventListener('click', event => {
 
-    currentInput += event.target.textContent
+    overallInput += currentNumber;
+    currentNumber = ''
+    overallInput += event.target.textContent
     updateDisplay()
 }))
 
 clear.addEventListener('click', () => {
 
-    currentInput = ''
+    overallInput = ''
+    currentNumber = ''
     screen.textContent = 0
 })
 
 deleteLastCharacter.addEventListener('click', () => {
 
-    if (currentInput.length > 1) {
-        currentInput = currentInput.slice(0, -1)
-    } else {
-        currentInput = 0
+    if (currentNumber.length > 0) {
+        currentNumber = currentNumber.slice(0, -1);
+    } else if (overallInput.length > 0) {
+        overallInput = overallInput.slice(0, -1);
     }
+
+    if (overallInput.length === 0 && currentNumber.length === 0) {
+        currentNumber = '0'
+    }
+
     updateDisplay()
-})
+});
 
 equal.addEventListener('click', () => {
 
-    currentInput = splitingInput()
+    overallInput += currentNumber;
+    currentNumber = ''
+    overallInput = splitingInput()
     updateDisplay()
+})
 
+dot.addEventListener('click', () => {
+
+    if (!currentNumber.includes(".")) {
+        currentNumber += "."
+        updateDisplay()
+    }
 })
 
 function updateDisplay() {
 
-    screen.textContent = currentInput //string
+    screen.textContent = overallInput + currentNumber
 }
 
 function operate(a, operator, b) {
@@ -60,22 +79,16 @@ function operate(a, operator, b) {
     } else {
         console.log('Error')
     }
-
 }
 
 function splitingInput() {
 
-    let arrayForOperate = currentInput.split(/(＋|－|\×|÷)/);
+    let arrayForOperate = overallInput.split(/(＋|－|×|÷)/)
     let result = operate(parseFloat(arrayForOperate[0]), arrayForOperate[1], parseFloat(arrayForOperate[2]))
 
     if (result === Math.floor(result)) {
-        return result.toString(); // Convert to string without decimal places
+        return result.toString()
     } else {
-        return result.toFixed(2); // Limit to two decimal places for floating-point numbers
+        return result.toFixed(2)
     }
 }
-
-
-
-
-
